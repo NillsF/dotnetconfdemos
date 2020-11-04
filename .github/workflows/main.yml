@@ -44,4 +44,4 @@ jobs:
           parameters: ./azuredeploy.parameters.kv.json
 
       - name: Azure logout
-          run: az logout
+        run: az logout
