@@ -25,12 +25,12 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Azure key vault - Get Secrets
-        uses: Azure/get-keyvault-secrets@v1
-        with:
-          keyvault: cmdeploymentdemo
-          secrets: 'tf-sql-username, tf-sql-password, clientsecret'
-        id: getKVSecrets
+#      - name: Azure key vault - Get Secrets
+#        uses: Azure/get-keyvault-secrets@v1
+#        with:
+#          keyvault: cmdeploymentdemo
+#          secrets: 'tf-sql-username, tf-sql-password, clientsecret'
+#        id: getKVSecrets
         
       - uses: hashicorp/setup-terraform@v1
       - name: Terraform Init
@@ -39,7 +39,7 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -var 'admin_username=${{steps.getKVSecrets.outputs.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}' -var 'client_secret=${{steps.getKVSecrets.outputs.clientsecret}}'
+        run: terraform plan -var 'admin_username=sqlgod' -var 'admin_password=Test123456789!' -var 'client_secret=123456'
         env:
           ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
           ARM_CLIENT_SECRET : ${{steps.getKVSecrets.outputs.clientsecret}}     
