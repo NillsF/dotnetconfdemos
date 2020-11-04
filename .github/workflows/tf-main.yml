@@ -42,7 +42,7 @@ jobs:
         run: terraform plan -var 'admin_username=sqlgod' -var 'admin_password=Test123456789!' -var 'client_secret=123456'
         env:
           ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
-          ARM_CLIENT_SECRET : ${{steps.getKVSecrets.outputs.clientsecret}}     
+          ARM_CLIENT_SECRET : ${{secrets.ARM_CLIENT_SECRET}}     
           ARM_SUBSCRIPTION_ID : ${{secrets.ARM_SUBSCRIPTION_ID}}     
           ARM_TENANT_ID : ${{secrets.ARM_TENANT_ID}}
         continue-on-error: false
@@ -52,7 +52,7 @@ jobs:
         run: terraform apply -auto-approve -var 'admin_username=${{steps.getKVSecrets.outputs.tf-sql-username}}' -var 'admin_password=${{steps.getKVSecrets.outputs.tf-sql-password}}' -var 'client_secret=${{steps.getKVSecrets.outputs.clientsecret}}'
         env:
           ARM_CLIENT_ID : ${{secrets.ARM_CLIENT_ID}}     
-          ARM_CLIENT_SECRET : ${{steps.getKVSecrets.outputs.clientsecret}}     
+          ARM_CLIENT_SECRET : ${{secrets.ARM_CLIENT_SECRET}}     
           ARM_SUBSCRIPTION_ID : ${{secrets.ARM_SUBSCRIPTION_ID}}     
           ARM_TENANT_ID : ${{secrets.ARM_TENANT_ID}}
           
