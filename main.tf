@@ -24,7 +24,10 @@ variable "client_secret" {
 provider "azurerm" {
   features {}
 }
-
+resource "azurerm_resource_group" "example" {
+  name     = var.resource_group_name
+  location = var.location
+}
 resource "azurerm_sql_server" "cmsqlserver" {
   name                                         = "cmdotnetconfsqlsrv"
   resource_group_name              = var.resource_group_name
